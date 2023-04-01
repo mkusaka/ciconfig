@@ -1,0 +1,25 @@
+{
+  "name": "circleci-config-builder",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mkusaka/circleci-config-builder.git",
+  "author": "mkusaka <hinoshita1992@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "json-schema-to-typescript": "^12.0.0",
+    "json-schema-to-zod": "^0.6.3",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "scripts": {
+    "fmt": "prettier --write types/",
+    "gen_schema": "json-schema-to-zod --deref --source schemastore/src/schemas/json/circleciconfig.json > types/circleci-config-zod.ts"
+  },
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^10.1.0",
+    "@types/js-yaml": "^4.0.5",
+    "js-yaml": "^4.1.0",
+    "zod": "^3.21.4"
+  }
+}

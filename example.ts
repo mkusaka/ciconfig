@@ -1,0 +1,47 @@
+import { CircleCIConfig } from "./types";
+
+const config: CircleCIConfig = {
+  version: 2.1,
+  jobs: {
+    build: {
+      docker: [
+        {
+          image: "circleci/<language>:<version TAG>",
+          auth: {
+            username: "mydockerhub-user",
+            password: "$DOCKERHUB_PASSWORD",
+          },
+        },
+      ],
+      steps: [
+        "checkout",
+        {
+          run: 'echo "this is the build job"',
+        },
+      ],
+    },
+    test: {
+      docker: [
+        {
+          image: "circleci/<language>:<version TAG>",
+          auth: {
+            username: "mydockerhub-user",
+            password: "$DOCKERHUB_PASSWORD",
+          },
+        },
+      ],
+      steps: [
+        "checkout",
+        {
+          run: 'echo "this is the test job"',
+        },
+      ],
+    },
+  },
+  workflows: {
+    version: 2,
+    build_and_test: {
+      jobs: ["build", "test"],
+    },
+  },
+};
