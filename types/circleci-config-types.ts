@@ -346,19 +346,21 @@ export type ExecutorChoice1 =
   | {
       docker: DockerExecutor;
       steps: Step[];
-      // [k: string]: unknown;
     }
   | {
       machine: MachineExecutor;
+      steps: Step[];
     }
   | {
       /**
        * Use the default machine executor image
        */
       machine: boolean;
+      steps: Step[];
     }
   | {
       macos: MacosExecutor;
+      steps: Step[];
     };
 
 export interface JSONSchemaForCircleCIConfigurationFiles {

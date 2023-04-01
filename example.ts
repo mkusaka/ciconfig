@@ -1,4 +1,6 @@
 import { type JSONSchemaForCircleCIConfigurationFiles } from "./types/circleci-config-types";
+import { dump } from "js-yaml";
+import fs from "fs";
 
 const config: JSONSchemaForCircleCIConfigurationFiles = {
   version: 2.1,
@@ -15,6 +17,12 @@ const config: JSONSchemaForCircleCIConfigurationFiles = {
       ],
       steps: [
         "checkout",
+        "setup_remote_docker",
+        {
+          setup_remote_docker: {
+            version: "20.10.18",
+          },
+        },
         {
           run: 'echo "this is the build job"',
         },
@@ -45,3 +53,5 @@ const config: JSONSchemaForCircleCIConfigurationFiles = {
     },
   },
 };
+
+fs.writeFileSync("output.yaml", dump(config));
