@@ -14,7 +14,9 @@
   },
   "scripts": {
     "fmt": "prettier --write types/",
-    "gen_schema": "json-schema-to-zod --deref --source schemastore/src/schemas/json/circleciconfig.json > types/circleci-config-zod.ts"
+    "diff:apply": "git apply circleciconfig.patch",
+    "renewschema": "cp schemastore/src/schemas/json/circleciconfig.json circleciconfig.json && yarn diff:apply && yarn gen_schema",
+    "gen_schema": "json-schema-to-zod --deref --source circleciconfig.json > types/circleci-config-zod.ts"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^10.1.0",
