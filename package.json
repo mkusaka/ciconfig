@@ -1,13 +1,14 @@
 {
   "name": "circleci-config-builder",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.1",
+  "main": "index.ts",
   "repository": "https://github.com/mkusaka/circleci-config-builder.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
     "@types/node": "^18.15.11",
+    "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^12.0.0",
     "prettier": "^2.8.7",
     "ts-node": "^10.9.1",
@@ -18,9 +19,8 @@
     "fmt": "prettier --write types/",
     "diff:apply": "git apply circleciconfig.patch",
     "renewschema": "cp schemastore/src/schemas/json/circleciconfig.json circleciconfig.json && yarn diff:apply && yarn types",
-    "types": "json2ts circleciconfig.json > types/circleci-config-types.ts"
+    "types": "json2ts circleciconfig.json > types/circleci-config-types.ts",
+    "example": "yarn ts-node -O '{\"module\": \"CommonJS\"}' example.ts"
   },
-  "dependencies": {
-    "js-yaml": "^4.1.0"
-  }
+  "dependencies": {}
 }
