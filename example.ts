@@ -1,6 +1,6 @@
-import { CircleCIConfig } from "./types";
+import { JSONSchemaForCircleCIConfigurationFiles } from "./types/circleci-config-types";
 
-const config: CircleCIConfig = {
+const config: JSONSchemaForCircleCIConfigurationFiles = {
   version: 2.1,
   jobs: {
     build: {

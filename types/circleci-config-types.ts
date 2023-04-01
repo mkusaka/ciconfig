@@ -416,48 +416,50 @@ export interface JSONSchemaForCircleCIConfigurationFiles {
     /**
      * The Workflows `version` field is used to issue warnings for deprecation or breaking changes during v2 Beta. It is deprecated as of CircleCI v2.1
      */
-    version?: 2;
-    [k: string]: {
-      /**
-       * Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
-       */
-      triggers?: {
-        /**
-         * A workflow may have a schedule indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
-         */
-        schedule?: {
+    version: 2;
+    [k: string]:
+      | {
           /**
-           * See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html)
+           * Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
            */
-          cron?: string;
+          triggers?: {
+            /**
+             * A workflow may have a schedule indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
+             */
+            schedule?: {
+              /**
+               * See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html)
+               */
+              cron?: string;
+              /**
+               * A map defining rules for execution on specific branches
+               */
+              filters?: {
+                branches?: Filter;
+              };
+              [k: string]: unknown;
+            };
+          }[];
+          jobs?: (
+            | string
+            | {
+                [k: string]: JobRef;
+              }
+          )[];
           /**
-           * A map defining rules for execution on specific branches
+           * https://circleci.com/docs/configuration-reference#logic-statements
+           *
+           * A logical statement to be used in dynamic configuration
            */
-          filters?: {
-            branches?: Filter;
-          };
-          [k: string]: unknown;
-        };
-      }[];
-      jobs?: (
-        | string
-        | {
-            [k: string]: JobRef;
-          }
-      )[];
-      /**
-       * https://circleci.com/docs/configuration-reference#logic-statements
-       *
-       * A logical statement to be used in dynamic configuration
-       */
-      when?: string | boolean | number;
-      /**
-       * https://circleci.com/docs/configuration-reference#logic-statements
-       *
-       * A logical statement to be used in dynamic configuration
-       */
-      unless?: string | boolean | number;
-    };
+          when?: string | boolean | number;
+          /**
+           * https://circleci.com/docs/configuration-reference#logic-statements
+           *
+           * A logical statement to be used in dynamic configuration
+           */
+          unless?: string | boolean | number;
+        }
+      | number;
   };
   [k: string]: unknown;
 }
