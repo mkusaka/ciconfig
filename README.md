@@ -1,1 +1,1 @@
-# circleci-config-builder
+# ciconfig

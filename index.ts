@@ -1,1 +1,4 @@
-export { JSONSchemaForCircleCIConfigurationFiles as Config } from "./types/circleci-config-types";
+export { JSONSchemaForCircleCIConfigurationFiles as CircleCIConfig } from "./types/circleci-config-types";
+export * from "./types/circleci-config-types";
+export * from "./types/github-workflow-types";
+export * from "./types/gtihub-action-types";

@@ -1,8 +1,8 @@
 {
-  "name": "circleci-config-builder",
+  "name": "ciconfig",
   "version": "0.0.1",
   "main": "index.ts",
-  "repository": "https://github.com/mkusaka/circleci-config-builder.git",
+  "repository": "https://github.com/mkusaka/ciconfig.git",
   "author": "mkusaka <hinoshita1992@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -17,9 +17,15 @@
   },
   "scripts": {
     "fmt": "prettier --write types/",
-    "diff:apply": "git apply circleciconfig.patch",
-    "renewschema": "cp schemastore/src/schemas/json/circleciconfig.json circleciconfig.json && yarn diff:apply && yarn types",
-    "types": "json2ts circleciconfig.json > types/circleci-config-types.ts",
+    "diff:apply:circleci": "git apply circleciconfig.patch",
+    "diff:apply:githubaction": "echo 1",
+    "diff:apply:githubworkflow": "echo 1",
+    "renewschema:circleci": "cp schemastore/src/schemas/json/circleciconfig.json circleciconfig.json && yarn diff:apply:circleci && yarn types:circleci",
+    "renewschema:githubaction": "cp schemastore/src/schemas/json/github-action.json github-action.json && yarn diff:apply:githubaction && yarn types:githubactions",
+    "renewschema:githubworkflow": "cp schemastore/src/schemas/json/github-workflow.json github-workflow.json && yarn diff:apply:githubworkflow && yarn types:githubworkflow",
+    "types:circleci": "json2ts circleciconfig.json > types/circleci-config-types.ts",
+    "types:githubworkflow": "json2ts github-workflow.json > types/github-workflow-types.ts",
+    "types:githubactions": "json2ts github-action.json > types/gtihub-action-types.ts",
     "example": "yarn ts-node -O '{\"module\": \"CommonJS\"}' example.ts"
   },
   "dependencies": {}
