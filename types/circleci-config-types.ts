@@ -10,11 +10,8 @@ export type Step =
   | "setup_remote_docker"
   | "add_ssh_keys"
   | string
-  | string
   | {
-      run?: {
-        [k: string]: unknown;
-      } & (
+      run?:
         | string
         | {
             /**
@@ -51,14 +48,11 @@ export type Step =
              * Specify when to enable or disable the step. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
              */
             when?: "always" | "on_success" | "on_fail";
-          }
-      );
+          };
       checkout?: Checkout;
       setup_remote_docker?: SetupRemoteDocker;
       save_cache?: SaveCache;
-      restore_cache?: {
-        [k: string]: unknown;
-      } & (
+      restore_cache?:
         | {
             /**
              * Single cache key to restore
@@ -78,13 +72,8 @@ export type Step =
              * List of cache keys to lookup for a cache to restore. Only first existing key will be restored.
              */
             keys: string[];
-          }
-      );
-      deploy?: {
-        [k: string]: unknown;
-      } & ({
-        [k: string]: unknown;
-      } & (
+          };
+      deploy?:
         | string
         | {
             /**
@@ -121,8 +110,7 @@ export type Step =
              * Specify when to enable or disable the step. Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
              */
             when?: "always" | "on_success" | "on_fail";
-          }
-      ));
+          };
       store_artifacts?: StoreArtifacts;
       store_test_results?: StoreTestResults;
       persist_to_workspace?: PersistToWorkspace;
@@ -133,8 +121,6 @@ export type Step =
       [k: string]: unknown;
     };
 export type Checkout = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -145,8 +131,6 @@ export type Checkout = {
   path?: string;
 };
 export type SetupRemoteDocker = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -170,8 +154,6 @@ export type SetupRemoteDocker = {
     | "19.03.13";
 };
 export type SaveCache = {
-  [k: string]: unknown;
-} & {
   /**
    * List of directories which should be added to the cache
    */
@@ -190,8 +172,6 @@ export type SaveCache = {
   when?: "always" | "on_success" | "on_fail";
 };
 export type StoreArtifacts = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -206,8 +186,6 @@ export type StoreArtifacts = {
   destination?: string;
 };
 export type StoreTestResults = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -218,8 +196,6 @@ export type StoreTestResults = {
   path: string;
 };
 export type PersistToWorkspace = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -234,8 +210,6 @@ export type PersistToWorkspace = {
   paths: string[];
 };
 export type AttachWorkspace = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -246,8 +220,6 @@ export type AttachWorkspace = {
   at: string;
 };
 export type AddSshKeys = {
-  [k: string]: unknown;
-} & {
   /**
    * Title of the step to be shown in the CircleCI UI
    */
@@ -258,8 +230,6 @@ export type AddSshKeys = {
   fingerprints?: string[];
 };
 export type When = {
-  [k: string]: unknown;
-} & {
   condition: Logical;
   /**
    * A list of steps to be performed
@@ -273,8 +243,6 @@ export type When = {
  */
 export type Logical = string | boolean | number;
 export type Unless = {
-  [k: string]: unknown;
-} & {
   condition: Logical;
   /**
    * A list of steps to be performed
@@ -312,26 +280,21 @@ export type ExecutorChoice = {
   environment?: {
     [k: string]: string | number;
   };
-  [k: string]: unknown;
 } & (
   | {
       docker: DockerExecutor;
-      [k: string]: unknown;
     }
   | {
       machine: MachineExecutor;
-      [k: string]: unknown;
     }
   | {
       /**
        * Use the default machine executor image
        */
       machine: boolean;
-      [k: string]: unknown;
     }
   | {
       macos: MacosExecutor;
-      [k: string]: unknown;
     }
 );
 /**
@@ -382,22 +345,20 @@ export type DockerExecutor = {
 export type ExecutorChoice1 =
   | {
       docker: DockerExecutor;
-      [k: string]: unknown;
+      steps: Step[];
+      // [k: string]: unknown;
     }
   | {
       machine: MachineExecutor;
-      [k: string]: unknown;
     }
   | {
       /**
        * Use the default machine executor image
        */
       machine: boolean;
-      [k: string]: unknown;
     }
   | {
       macos: MacosExecutor;
-      [k: string]: unknown;
     };
 
 export interface JSONSchemaForCircleCIConfigurationFiles {
@@ -437,7 +398,6 @@ export interface JSONSchemaForCircleCIConfigurationFiles {
               filters?: {
                 branches?: Filter;
               };
-              [k: string]: unknown;
             };
           }[];
           jobs?: (
@@ -461,8 +421,8 @@ export interface JSONSchemaForCircleCIConfigurationFiles {
         }
       | number;
   };
-  [k: string]: unknown;
 }
+
 /**
  * https://circleci.com/docs/configuration-reference#orbs-requires-version-21
  *
@@ -476,9 +436,9 @@ export interface Orbs {
         commands?: Commands;
         executors?: Executors;
         jobs?: Jobs;
-        [k: string]: unknown;
       };
 }
+
 /**
  * https://circleci.com/docs/configuration-reference#commands-requires-version-21
  *
@@ -510,19 +470,16 @@ export interface Commands {
             type: "string";
             description?: string;
             default?: string;
-            [k: string]: unknown;
           }
         | {
             type: "boolean";
             description?: string;
             default?: boolean;
-            [k: string]: unknown;
           }
         | {
             type: "integer";
             description?: string;
             default?: number;
-            [k: string]: unknown;
           }
         | {
             type: "enum";
@@ -532,40 +489,37 @@ export interface Commands {
             enum: [string, ...string[]];
             description?: string;
             default?: string;
-            [k: string]: unknown;
           }
         | {
             type: "executor";
             description?: string;
             default?: string;
-            [k: string]: unknown;
           }
         | {
             type: "steps";
             description?: string;
             default?: Step[];
-            [k: string]: unknown;
           }
         | {
             type: "env_var_name";
             description?: string;
             default?: string;
-            [k: string]: unknown;
           };
     };
     /**
      * A string that describes the purpose of the command.
      */
     description?: string;
-    [k: string]: unknown;
   };
 }
+
 /**
  * Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
  */
 export interface Executors {
   [k: string]: ExecutorChoice;
 }
+
 /**
  * Options for the [machine executor](https://circleci.com/docs/configuration-reference#machine)
  */
@@ -579,6 +533,7 @@ export interface MachineExecutor {
    */
   docker_layer_caching?: boolean & string;
 }
+
 /**
  * Options for the [macOS executor](https://circleci.com/docs/configuration-reference#macos)
  */
@@ -588,6 +543,7 @@ export interface MacosExecutor {
    */
   xcode: number | string;
 }
+
 /**
  * Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container or VM.
  */
@@ -599,7 +555,6 @@ export interface Jobs {
          * The name of the executor to use (defined via the top level executors map).
          */
         executor: string;
-        [k: string]: unknown;
       }
     | {
         /**
@@ -610,11 +565,10 @@ export interface Jobs {
            * The name of the executor to use (defined via the top level executors map).
            */
           name: string;
-          [k: string]: unknown;
         };
-        [k: string]: unknown;
       };
 }
+
 /**
  * A map defining rules for execution on specific branches
  */
@@ -628,6 +582,7 @@ export interface Filter {
    */
   ignore?: string | string[];
 }
+
 /**
  * Run a job as part of this workflow
  */
@@ -678,5 +633,4 @@ export interface JobRef {
      */
     alias?: string;
   };
-  [k: string]: unknown;
 }

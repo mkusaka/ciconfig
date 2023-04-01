@@ -1,4 +1,4 @@
-import { JSONSchemaForCircleCIConfigurationFiles } from "./types/circleci-config-types";
+import { type JSONSchemaForCircleCIConfigurationFiles } from "./types/circleci-config-types";
 
 const config: JSONSchemaForCircleCIConfigurationFiles = {
   version: 2.1,
@@ -31,7 +31,7 @@ const config: JSONSchemaForCircleCIConfigurationFiles = {
         },
       ],
       steps: [
-        "checkout",
+        "add_ssh_keys",
         {
           run: 'echo "this is the test job"',
         },
